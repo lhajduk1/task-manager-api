@@ -65,7 +65,7 @@ class TaskController extends Controller
     /**
      * Mark status as completed for the specified resource in storage.
      */
-    public function markAsCompleted(Task $task): TaskResource
+    public function complete(Task $task): TaskResource
     {
         $task->update([
             'status' => TaskStatusEnum::DONE
