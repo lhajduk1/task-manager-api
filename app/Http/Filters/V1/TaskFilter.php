@@ -11,6 +11,13 @@ class TaskFilter extends QueryFilter
         'user'
     ];
 
+    protected array $sortable = [
+        'title',
+        'status',
+        'due_date',
+        'createdAts'
+    ];
+
     public function include(string $value): Builder
     {
         $includes = collect(explode(',', $value))

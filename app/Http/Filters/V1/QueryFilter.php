@@ -4,10 +4,12 @@ namespace App\Http\Filters\V1;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 abstract class QueryFilter
 {
     protected Builder $builder;
+    protected array $sortable;
 
     public function __construct(private Request $request) {}
 
@@ -33,5 +35,19 @@ abstract class QueryFilter
         }
 
         return $this->builder;
+    }
+
+    public function sort(string $value): void
+    {
+        $sortables = explode(',', $value);
+
+        foreach ($sortables as $sortable) {
+            $direction = Str::startsWith($sortable, '-') ? 'desc' : 'asc';
+            $column = Str::of($sortable)->remove('-')->snake()->value();
+
+            if (in_array($column, $this->sortable)) {
+                $this->builder->orderBy($column, $direction);
+            }
+        }
     }
 }
