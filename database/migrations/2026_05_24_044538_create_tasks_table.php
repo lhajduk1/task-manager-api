@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('status', ['todo', 'in_progress', 'done'])->default('todo');
             $table->timestamp('due_date')->nullable();
 
-            $table->foreignIdFor(User::class)->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
 
             $table->timestamps();
             $table->softDeletes();
