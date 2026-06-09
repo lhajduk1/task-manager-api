@@ -18,7 +18,7 @@ final class Abilities
     {
         // Normal user
         return [
-            self::VIEW,
+            self::VIEW_OWN_TASK,
             self::UPDATE_OWN_TASK,
             self::DELETE_OWN_TASK,
             self::COMPLETE_OWN_TASK
