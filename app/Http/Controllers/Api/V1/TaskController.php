@@ -54,8 +54,8 @@ class TaskController extends ApiController
             return new TaskResource($task);
         } catch (AuthorizationException $e) {
             return response()->json([
-                'message' => 'You are not authorized to view that resource.'
-            ], 401);
+                'message' => 'You are not permitted to view that resource.'
+            ], 403);
         }
     }
 
