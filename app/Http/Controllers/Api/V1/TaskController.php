@@ -12,6 +12,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,9 +24,11 @@ class TaskController extends ApiController
     /**
      * Display a listing of the resource.
      */
-    public function index(TaskFilter $filter): AnonymousResourceCollection
+    public function index(Request $request, TaskFilter $filter): AnonymousResourceCollection
     {
-        return TaskResource::collection(Task::filter($filter)->paginate());
+        return TaskResource::collection(
+            $request->user()->tasks()->filter($filter)->paginate()
+        );
     }
 
     /**
@@ -35,15 +38,25 @@ class TaskController extends ApiController
     {
         $user = Auth::user();
 
-        return new TaskResource($user->tasks()->create($request->validated()));
+        return new TaskResource(
+            $user->tasks()->create($request->validated())
+        );
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Task $task): TaskResource
+    public function show(Task $task): TaskResource|JsonResponse
     {
-        return new TaskResource($task);
+        try {
+            $this->isAble('view', $task);
+
+            return new TaskResource($task);
+        } catch (AuthorizationException $e) {
+            return response()->json([
+                'message' => 'You are not authorized to view that resource.'
+            ], 401);
+        }
     }
 
     /**
