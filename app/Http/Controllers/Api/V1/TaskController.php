@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Actions\v1\ToggleCompleteTaskAction;
 use App\Enums\TaskStatusEnum;
 use App\Http\Filters\V1\TaskFilter;
 use App\Http\Requests\V1\{StoreTaskRequest, UpdateTaskRequest};
@@ -79,12 +80,12 @@ class TaskController extends ApiController
     /**
      * Mark status as completed for the specified resource in storage.
      */
-    public function toggleComplete(Task $task): TaskResource|JsonResponse
+    public function toggleComplete(Task $task, ToggleCompleteTaskAction $action): TaskResource|JsonResponse
     {
         $this->isAble('toggleComplete', $task);
 
-        $task->update(['status' => $task->status->toggle()]);
-
-        return new TaskResource($task);
+        return new TaskResource(
+            $action->execute($task)
+        );
     }
 }
