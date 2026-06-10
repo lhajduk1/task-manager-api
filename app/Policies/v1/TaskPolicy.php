@@ -40,9 +40,9 @@ class TaskPolicy
         return false;
     }
 
-    public function complete(User $user, Task $task): bool
+    public function toggleComplete(User $user, Task $task): bool
     {
-        if ($user->tokenCan(Abilities::COMPLETE_OWN_TASK)) {
+        if ($user->tokenCan(Abilities::TOGGLE_COMPLETE_OWN_TASK)) {
             return $user->id === $task->user_id;
         }
 

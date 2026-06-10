@@ -79,11 +79,11 @@ class TaskController extends ApiController
     /**
      * Mark status as completed for the specified resource in storage.
      */
-    public function complete(Task $task): TaskResource|JsonResponse
+    public function toggleComplete(Task $task): TaskResource|JsonResponse
     {
-        $this->isAble('complete', $task);
+        $this->isAble('toggleComplete', $task);
 
-        $task->update(['status' => TaskStatusEnum::DONE]);
+        $task->update(['status' => $task->status->toggle()]);
 
         return new TaskResource($task);
     }

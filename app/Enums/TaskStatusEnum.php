@@ -15,4 +15,12 @@ enum TaskStatusEnum: string
             self::DONE => 'Done',
         };
     }
+
+    public function toggle(): self
+    {
+        return match ($this) {
+            self::TODO => self::DONE,
+            self::DONE => self::TODO,
+        };
+    }
 }

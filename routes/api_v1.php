@@ -5,5 +5,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth:sanctum'], function (): void {
     Route::apiResource('tasks', TaskController::class);
-    Route::put('tasks/{task}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
+    Route::put('tasks/{task}/toggle-complete', [TaskController::class, 'toggleComplete'])->name('tasks.toggleComplete');
 });
