@@ -10,6 +10,7 @@ final class Abilities
     public const string DELETE_TASK = 'delete:task';
 
     public const string VIEW_OWN_TASK = 'view:own:task';
+    public const string CREATE_OWN_TASK = 'create:own:task';
     public const string UPDATE_OWN_TASK = 'update:own:task';
     public const string DELETE_OWN_TASK = 'delete:own:task';
     public const string COMPLETE_OWN_TASK = 'complete:own:task';
@@ -19,6 +20,7 @@ final class Abilities
         // Normal user
         return [
             self::VIEW_OWN_TASK,
+            self::CREATE_OWN_TASK,
             self::UPDATE_OWN_TASK,
             self::DELETE_OWN_TASK,
             self::COMPLETE_OWN_TASK

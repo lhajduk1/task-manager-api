@@ -12,7 +12,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Support\Facades\Auth;
 
 class TaskController extends ApiController
 {
@@ -34,10 +33,10 @@ class TaskController extends ApiController
      */
     public function store(StoreTaskRequest $request): TaskResource
     {
-        $user = Auth::user();
+        $this->isAble('store', Task::class);
 
         return new TaskResource(
-            $user->tasks()->create($request->validated())
+            $request->user()->tasks()->create($request->validated())
         );
     }
 

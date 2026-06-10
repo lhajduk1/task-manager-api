@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ApiController extends Controller
 {
-    public function isAble(string $ability, Model $targetModel)
+    public function isAble(string $ability, Model|string $targetModel)
     {
-        return $this->authorize($ability, [$targetModel, $this->policyClass]);
+        return $this->authorize($ability, $targetModel);
     }
 }

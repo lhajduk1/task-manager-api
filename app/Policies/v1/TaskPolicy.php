@@ -16,6 +16,12 @@ class TaskPolicy
         return false;
     }
 
+    public function store(User $user): bool
+    {
+        return $user->tokenCan(Abilities::CREATE_OWN_TASK) ||
+            $user->tokenCan(Abilities::CREATE_TASK);
+    }
+
     public function update(User $user, Task $task): bool
     {
         if ($user->tokenCan(Abilities::UPDATE_OWN_TASK)) {
