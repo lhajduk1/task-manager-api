@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\TaskStatusEnum;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
@@ -21,7 +22,7 @@ class TaskFactory extends Factory
         return [
             'title' => fake()->text(50),
             'description' => fake()->paragraph(5),
-            'status' => Arr::random(['todo', 'in_progress', 'done']),
+            'status' => Arr::random([TaskStatusEnum::TODO, TaskStatusEnum::DONE]),
             'due_date' => Arr::random([null, now()])
         ];
     }

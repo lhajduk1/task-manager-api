@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 255);
             $table->text('description')->nullable();
-            $table->enum('status', ['todo', 'in_progress', 'done'])->default('todo');
+            $table->enum('status', ['todo', 'done'])->default('todo');
             $table->timestamp('due_date')->nullable();
 
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
