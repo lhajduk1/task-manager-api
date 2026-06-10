@@ -8,8 +8,6 @@ use App\Http\Requests\V1\{StoreTaskRequest, UpdateTaskRequest};
 use App\Http\Resources\Api\V1\TaskResource;
 use App\Models\Task;
 use App\Policies\v1\TaskPolicy;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -46,39 +44,23 @@ class TaskController extends ApiController
     /**
      * Display the specified resource.
      */
-    public function show(Task $task): TaskResource|JsonResponse
+    public function show(Task $task): TaskResource
     {
-        try {
-            $this->isAble('view', $task);
+        $this->isAble('view', $task);
 
-            return new TaskResource($task);
-        } catch (AuthorizationException $e) {
-            return response()->json([
-                'message' => 'You are not permitted to view that resource.'
-            ], 403);
-        }
+        return new TaskResource($task);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTaskRequest $request, Task $task): TaskResource|JsonResponse
+    public function update(UpdateTaskRequest $request, Task $task): TaskResource
     {
-        try {
-            $this->isAble('update', $task);
+        $this->isAble('update', $task);
 
-            $task->update($request->validated());
+        $task->update($request->validated());
 
-            return new TaskResource($task);
-        } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'message' => 'Task cannot be found.'
-            ], 404);
-        } catch (AuthorizationException $e) {
-            return response()->json([
-                'message' => 'You are not authorized to update that resource.'
-            ], 401);
-        }
+        return new TaskResource($task);
     }
 
     /**
@@ -86,23 +68,13 @@ class TaskController extends ApiController
      */
     public function destroy(Task $task): JsonResponse
     {
-        try {
-            $this->isAble('delete', $task);
+        $this->isAble('delete', $task);
 
-            $task->delete();
+        $task->delete();
 
-            return response()->json([
-                'message' => 'Task was successfully deleted!'
-            ]);
-        } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'message' => 'Task cannot be found.'
-            ], 404);
-        } catch (AuthorizationException $e) {
-            return response()->json([
-                'message' => 'You are not authorized to delete that resource.'
-            ], 401);
-        }
+        return response()->json([
+            'message' => 'Task was successfully deleted!'
+        ]);
     }
 
     /**
@@ -110,20 +82,10 @@ class TaskController extends ApiController
      */
     public function complete(Task $task): TaskResource|JsonResponse
     {
-        try {
-            $this->isAble('complete', $task);
+        $this->isAble('complete', $task);
 
-            $task->update(['status' => TaskStatusEnum::DONE]);
+        $task->update(['status' => TaskStatusEnum::DONE]);
 
-            return new TaskResource($task);
-        } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'message' => 'Task cannot be found.'
-            ], 404);
-        } catch (AuthorizationException $e) {
-            return response()->json([
-                'message' => 'You are not authorized to mark as completed that resource.'
-            ], 401);
-        }
+        return new TaskResource($task);
     }
 }
