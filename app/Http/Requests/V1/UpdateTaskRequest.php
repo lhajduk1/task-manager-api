@@ -24,10 +24,10 @@ class UpdateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:5000'],
-            'status' => [new Enum(TaskStatusEnum::class)],
-            'due_date' => ['datetime'],
+            'title' => ['sometimes', 'string', 'max:255'],
+            'description' => ['sometimes', 'string', 'max:5000'],
+            'due_date' => ['sometimes', 'date'],
+            'user_id' => 'prohibited'
         ];
     }
 }
