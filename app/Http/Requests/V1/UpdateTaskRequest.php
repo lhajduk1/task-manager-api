@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\V1;
 
-use App\Enums\TaskStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 class UpdateTaskRequest extends FormRequest
 {
