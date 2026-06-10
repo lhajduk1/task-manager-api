@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\V1;
 
-use App\Enums\TaskStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 class StoreTaskRequest extends FormRequest
 {
@@ -25,9 +23,8 @@ class StoreTaskRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:5000'],
-            'status' => [new Enum(TaskStatusEnum::class)],
-            'due_date' => ['datetime'],
+            'description' => ['nullable', 'string', 'max:5000'],
+            'due_date' => ['nullable', 'date'],
         ];
     }
 }

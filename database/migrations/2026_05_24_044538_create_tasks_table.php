@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\TaskStatusEnum;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 255);
             $table->text('description')->nullable();
-            $table->enum('status', ['todo', 'done'])->default('todo');
+            $table->enum('status', ['todo', 'done'])->default(TaskStatusEnum::TODO);
             $table->timestamp('due_date')->nullable();
 
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();

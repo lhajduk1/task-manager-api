@@ -25,6 +25,10 @@ class Task extends Model
         'due_date'
     ];
 
+    protected $attributes = [
+        'status' => TaskStatusEnum::TODO,
+    ];
+
     /**
      * Get the attributes that should be cast.
      *
