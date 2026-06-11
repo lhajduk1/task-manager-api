@@ -3,21 +3,16 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Actions\v1\ToggleCompleteTaskAction;
-use App\Enums\TaskStatusEnum;
 use App\Http\Filters\V1\TaskFilter;
 use App\Http\Requests\V1\{StoreTaskRequest, UpdateTaskRequest};
 use App\Http\Resources\Api\V1\TaskResource;
 use App\Models\Task;
-use App\Policies\v1\TaskPolicy;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Policies\V1\TaskPolicy;
+use Illuminate\Http\{JsonResponse, Request};
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class TaskController extends ApiController
 {
-    use AuthorizesRequests;
-
     protected string $policyClass = TaskPolicy::class;
     /**
      * Display a listing of the resource.
@@ -80,7 +75,7 @@ class TaskController extends ApiController
     /**
      * Mark status as completed for the specified resource in storage.
      */
-    public function toggleComplete(Task $task, ToggleCompleteTaskAction $action): TaskResource|JsonResponse
+    public function toggleComplete(Task $task, ToggleCompleteTaskAction $action): TaskResource
     {
         $this->isAble('toggleComplete', $task);
 

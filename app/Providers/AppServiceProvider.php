@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Task;
-use App\Policies\v1\TaskPolicy;
+use App\Policies\V1\TaskPolicy;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;

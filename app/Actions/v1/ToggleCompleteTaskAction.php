@@ -6,7 +6,7 @@ use App\Models\Task;
 
 class ToggleCompleteTaskAction
 {
-    public function execute(Task $task)
+    public function execute(Task $task): Task
     {
         $task->update(['status' => $task->status->toggle()]);
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies\v1;
+namespace App\Policies\V1;
 
 use App\Models\{Task, User};
 use App\Permissions\V1\Abilities;

@@ -13,7 +13,7 @@ abstract class QueryFilter
 
     public function __construct(private Request $request) {}
 
-    public function apply(Builder $builder)
+    public function apply(Builder $builder): Builder
     {
         $this->builder = $builder;
 
@@ -26,7 +26,7 @@ abstract class QueryFilter
         return $builder;
     }
 
-    public function filter(array $arr)
+    public function filter(array $arr): Builder
     {
         foreach ($arr as $key => $value) {
             if (method_exists($this, $key)) {

@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 
 class TaskFilter extends QueryFilter
 {
-    private $allowedIncludes = [
+    private array $allowedIncludes = [
         'user'
     ];
 
