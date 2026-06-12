@@ -47,6 +47,11 @@ class Task extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
+
     public function scopeFilter(Builder $builder, QueryFilter $filters): Builder
     {
         return $filters->apply($builder);

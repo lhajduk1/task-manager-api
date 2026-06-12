@@ -1,7 +1,5 @@
 <?php
 
-use App\Enums\TaskStatusEnum;
-use App\Models\Project;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,15 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 255);
+            $table->string('name', 255);
             $table->text('description')->nullable();
-            $table->enum('status', ['todo', 'done'])->default(TaskStatusEnum::TODO);
-            $table->timestamp('due_date')->nullable();
 
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Project::class)->constrained()->cascadeOnDelete();
 
             $table->timestamps();
             $table->softDeletes();
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('projects');
     }
 };
