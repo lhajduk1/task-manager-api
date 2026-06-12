@@ -40,7 +40,7 @@ class TaskResource extends JsonResource
                     ]
                 ]
             ],
-            'includes' => new UserResource($this->whenLoaded('user')),
+            'included' => new UserResource($this->whenLoaded('user')),
             'links' => [
                 'self' => route('tasks.show', ['task' => $this->id])
             ]

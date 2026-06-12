@@ -26,7 +26,7 @@ class UserResource extends JsonResource
                     'udpatedAt' => $this->updated_at,
                 ])
             ],
-            'includes' => TaskResource::collection($this->whenLoaded('tasks')),
+            'included' => TaskResource::collection($this->whenLoaded('tasks')),
             'links' => []
         ];
     }
