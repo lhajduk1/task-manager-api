@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
 class Project extends Model
 {
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['name', 'description'];
 
     public function user(): BelongsTo
     {
