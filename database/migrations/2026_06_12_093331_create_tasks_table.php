@@ -2,7 +2,6 @@
 
 use App\Enums\TaskStatusEnum;
 use App\Models\Project;
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +20,6 @@ return new class extends Migration
             $table->enum('status', ['todo', 'done'])->default(TaskStatusEnum::TODO);
             $table->timestamp('due_date')->nullable();
 
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Project::class)->constrained()->cascadeOnDelete();
 
             $table->timestamps();

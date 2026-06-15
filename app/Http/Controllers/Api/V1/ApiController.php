@@ -11,7 +11,7 @@ class ApiController extends Controller
 {
     use AuthorizesRequests;
 
-    public function isAble(string $ability, Model|string $targetModel): Response
+    public function isAble(string $ability, Model|string|array $targetModel): Response
     {
         return $this->authorize($ability, $targetModel);
     }

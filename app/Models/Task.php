@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use App\Enums\TaskStatusEnum;
-use App\Http\Filters\V1\QueryFilter;
+use App\Traits\FilterScopes;
 use Database\Factories\TaskFactory;
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
-use Illuminate\Database\Eloquent\Attributes\UsePolicy;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 #[UseFactory(TaskFactory::class)]
 class Task extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, FilterScopes;
 
     protected $fillable = [
         'title',
@@ -50,10 +48,5 @@ class Task extends Model
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);
-    }
-
-    public function scopeFilter(Builder $builder, QueryFilter $filters): Builder
-    {
-        return $filters->apply($builder);
     }
 }

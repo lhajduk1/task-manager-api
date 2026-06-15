@@ -2,12 +2,19 @@
 
 namespace App\Models;
 
+use App\Traits\FilterScopes;
+use Database\Factories\ProjectFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
+#[UseFactory(ProjectFactory::class)]
 class Project extends Model
 {
-    protected $fillable = ['name', 'description'];
+    use HasFactory, FilterScopes;
+
+    protected $fillable = ['title', 'description'];
 
     public function user(): BelongsTo
     {

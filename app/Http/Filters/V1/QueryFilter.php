@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 abstract class QueryFilter
 {
     protected Builder $builder;
+    protected array $allowedIncludes;
     protected array $sortable;
 
     public function __construct(private Request $request) {}
@@ -24,6 +25,17 @@ abstract class QueryFilter
         }
 
         return $builder;
+    }
+
+    public function include(string $value): Builder
+    {
+        $includes = collect(explode(',', $value))
+            ->filter()
+            ->intersect($this->allowedIncludes)
+            ->values()
+            ->all();
+
+        return $this->builder->with($includes);
     }
 
     public function filter(array $arr): Builder

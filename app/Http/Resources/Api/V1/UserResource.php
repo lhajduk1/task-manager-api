@@ -15,19 +15,20 @@ class UserResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'type' => 'user',
-            'id' => $this->id,
-            'attributes' => [
-                'name' => $this->name,
-                'email' => $this->email,
-                $this->mergeWhen($request->routeIs('users.*'), [
-                    'emailVerifiedAt' => $this->email_verified_at,
-                    'createdAt' => $this->created_at,
-                    'udpatedAt' => $this->updated_at,
-                ])
+            'data' => [
+                'type' => 'user',
+                'id' => $this->id,
+                'attributes' => [
+                    'name' => $this->name,
+                    'email' => $this->email,
+                    $this->mergeWhen($request->routeIs('users.*'), [
+                        'emailVerifiedAt' => $this->email_verified_at,
+                        'createdAt' => $this->created_at,
+                        'udpatedAt' => $this->updated_at,
+                    ])
+                ],
             ],
-            'included' => TaskResource::collection($this->whenLoaded('tasks')),
-            'links' => []
+            'included' => ProjectResource::collection($this->whenLoaded('projects')),
         ];
     }
 }

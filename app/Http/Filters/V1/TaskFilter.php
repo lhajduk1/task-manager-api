@@ -7,27 +7,16 @@ use Illuminate\Support\Carbon;
 
 class TaskFilter extends QueryFilter
 {
-    private array $allowedIncludes = [
-        'user'
+    protected array $allowedIncludes = [
+        'project'
     ];
 
     protected array $sortable = [
         'title',
         'status',
         'due_date',
-        'createdAts'
+        'created_at'
     ];
-
-    public function include(string $value): Builder
-    {
-        $includes = collect(explode(',', $value))
-            ->filter()
-            ->intersect($this->allowedIncludes)
-            ->values()
-            ->all();
-
-        return $this->builder->with($includes);
-    }
 
     public function status(string $value): Builder
     {
