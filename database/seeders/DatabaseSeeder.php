@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comment;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
@@ -23,6 +24,15 @@ class DatabaseSeeder extends Seeder
                     ->count(1)
                     ->has(
                         Task::factory()->count(3)
+                            ->has(
+                                Comment::factory()
+                                    ->state(function (array $attributes, Task $task) {
+                                        return [
+                                            'user_id' => $task->project->user_id,
+                                        ];
+                                    })
+                                    ->count(10)
+                            )
                     )
             )
             ->create();
