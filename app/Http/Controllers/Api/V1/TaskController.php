@@ -51,7 +51,7 @@ class TaskController extends ApiController
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTaskRequest $request, Task $task): TaskResource
+    public function update(UpdateTaskRequest $request, Project $project, Task $task): TaskResource
     {
         $this->isAble('update', $task);
 
@@ -63,7 +63,7 @@ class TaskController extends ApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Task $task): JsonResponse
+    public function destroy(Project $project, Task $task): JsonResponse
     {
         $this->isAble('delete', $task);
 
@@ -77,7 +77,7 @@ class TaskController extends ApiController
     /**
      * Mark status as completed for the specified resource in storage.
      */
-    public function toggleComplete(Task $task, ToggleCompleteTaskAction $action): TaskResource
+    public function toggleComplete(Project $project, Task $task, ToggleCompleteTaskAction $action): TaskResource
     {
         $this->isAble('toggleComplete', $task);
 
