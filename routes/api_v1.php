@@ -9,7 +9,7 @@ Route::scopeBindings()
         Route::apiResource('projects', ProjectController::class);
 
         Route::apiResource('projects.tasks', TaskController::class);
-        Route::put('projects/{project}/tasks/{task}/toggle-complete', [TaskController::class, 'toggleComplete'])->name('tasks.toggleComplete');
+        Route::patch('projects/{project}/tasks/{task}/toggle-complete', [TaskController::class, 'toggleComplete'])->name('tasks.toggleComplete');
 
         Route::apiResource('projects.tasks.comments', CommentController::class);
 
