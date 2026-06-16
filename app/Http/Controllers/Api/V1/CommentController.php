@@ -19,7 +19,10 @@ class CommentController extends ApiController
     {
         $this->isAble('store', Comment::class);
 
-        $comment = $task->comments()->create($request->validated());
+        $comment = $task->comments()->create([
+            ...$request->validated(),
+            'user_id' => $request->user()->id
+        ]);
 
         return new CommentResource($comment);
     }
@@ -33,7 +36,7 @@ class CommentController extends ApiController
     {
         $this->isAble('update', $comment);
 
-        $comment = $comment->update($request->validated());
+        $comment->update($request->validated());
 
         return new CommentResource($comment);
     }
