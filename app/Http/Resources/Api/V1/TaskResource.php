@@ -42,7 +42,7 @@ class TaskResource extends JsonResource
                     ]
                 ],
                 'links' => [
-                    'self' => route('tasks.show', ['project' => $this->project_id, 'task' => $this->id])
+                    'self' => route('projects.tasks.show', ['project' => $this->project_id, 'task' => $this->id])
                 ],
             ],
             'included' => new ProjectResource($this->whenLoaded('project')),
