@@ -30,6 +30,17 @@ final class Abilities
     public const string DELETE_OWN_TASK = 'delete:own:task';
     public const string TOGGLE_COMPLETE_OWN_TASK = 'toggle:complete:own:task';
 
+    // Comment
+    public const string VIEW_COMMENT = 'view:comment';
+    public const string CREATE_COMMENT = 'create:comment';
+    public const string UPDATE_COMMENT = 'update:comment';
+    public const string DELETE_COMMENT = 'delete:comment';
+
+    public const string VIEW_OWN_COMMENT = 'view:own:comment';
+    public const string CREATE_OWN_COMMENT = 'create:own:comment';
+    public const string UPDATE_OWN_COMMENT = 'update:own:comment';
+    public const string DELETE_OWN_COMMENT = 'delete:own:comment';
+
     public static function getAbilities(): array
     {
         // Normal user
@@ -46,7 +57,13 @@ final class Abilities
             self::CREATE_OWN_TASK,
             self::UPDATE_OWN_TASK,
             self::DELETE_OWN_TASK,
-            self::TOGGLE_COMPLETE_OWN_TASK
+            self::TOGGLE_COMPLETE_OWN_TASK,
+
+            // Comment
+            self::VIEW_OWN_COMMENT,
+            self::CREATE_OWN_COMMENT,
+            self::UPDATE_OWN_COMMENT,
+            self::DELETE_OWN_COMMENT
         ];
     }
 }
