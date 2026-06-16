@@ -35,7 +35,7 @@ class ProjectResource extends JsonResource
                     ],
                     'tasks' => [
                         'links' => [
-                            'related' => route('tasks.index', ['project' => $this->id])
+                            'related' => route('projects.tasks.index', ['project' => $this->id])
                         ],
                         'data' => $this->whenLoaded(
                             'tasks',
