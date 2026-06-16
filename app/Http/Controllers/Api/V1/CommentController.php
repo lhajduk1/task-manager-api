@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\{StoreCommentRequest, UpdateCommentRequest};
 use App\Http\Resources\Api\V1\CommentResource;
 use App\Models\{Project, Task, Comment};
-use Illuminate\Http\{Request, JsonResponse};
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CommentController extends ApiController
@@ -15,7 +15,7 @@ class CommentController extends ApiController
         return CommentResource::collection($task->comments()->paginate(10));
     }
 
-    public function store(Request $request, Project $project, Task $task): CommentResource
+    public function store(StoreCommentRequest $request, Project $project, Task $task): CommentResource
     {
         $this->isAble('store', Comment::class);
 
@@ -29,7 +29,7 @@ class CommentController extends ApiController
         return new CommentResource($comment);
     }
 
-    public function update(Request $request, Project $project, Task $task, Comment $comment): CommentResource
+    public function update(UpdateCommentRequest $request, Project $project, Task $task, Comment $comment): CommentResource
     {
         $this->isAble('update', $comment);
 
